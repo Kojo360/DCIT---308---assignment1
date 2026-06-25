@@ -38,27 +38,94 @@ public class GhanaServiceCentre {
     }
 
     public void admitRequest(Request request) {
-        // TODO 20: Route request into the correct structure.
+        boolean admitted = false;
         // Rule 1: If needsCorrection is true, add to correctionDeque.
+        if (request.needsCorrection){
+            if (!correctionDeque.isFull()){
+                correctionDeque.addRear(request);
+                actions.push(new ActionRecord("ADMIT_CORRECTION", request));
+                admitted = true;
+            } else {
+                overflowCount++;
+            }
+        }
         // Rule 2: Else if urgencyLevel >= 4, add to urgentQueue.
+        else if (request.urgencyLevel >= 4) {
+             actions.push(new ActionRecord("ADMIT_URGENT", request));
+            urgentQueue.add(request);
+            admitted = true;
+        
+        }
         // Rule 3: Else add to normalQueue.
         // Rule 4: If any bounded structure is full, increase overflowCount.
+        else {
+            if (!normalQueue.isFull()) {
+                normalQueue.enqueue(request);
+                 actions.push(new ActionRecord("ADMIT_NORMAL", request));
+                admitted = true;
+            } else {
+                overflowCount++;
+            }
+        }
+        
         // Rule 5: Push an ActionRecord for successful admissions.
+        if (admitted) {
+             actions.push(new ActionRecord("ADMIT_CORRECTION", request));
+
+        }
     }
 
     public Request serveNextRequest() {
-        // TODO 21: Serve urgentQueue first, then correctionDeque, then normalQueue.
-        // TODO 22: Update served counters and totalEstimatedMinutesServed.
-        // TODO 23: Push a SERVE action onto the stack.
-        return null;
+        Request served = null;
+
+        if (!urgentQueue.isEmpty()) {
+            served = urgentQueue.poll();
+            urgentServed++;
+
+        }
+        else if (!correctionDeque.isEmpty()) {
+            served = correctionDeque.removeFront();
+            correctionServed++;
+        }
+        else if (!normalQueue.isEmpty()) {
+            served = normalQueue.dequeue();
+            normalServed++;
+        }
+
+        if (served == null) return null;
+
+        servedCount++;
+        totalEstimatedMinutesServed += served.estimatedMinutes;
+        actions.push(new ActionRecord("SERVE", served));
+        return served;
     }
 
     public void undoLastAction() {
-        // TODO 24: Pop the last action and reverse it where possible.
-        // Minimum acceptable behaviour:
-        // - If the last action was SERVE, re-admit the request using admitRequest(request).
-        // - If the last action was an admission, explain in your report how you handled or limited undo.
-        // Stronger solution: remove the exact request from the structure it entered.
+        ActionRecord last = actions.pop();
+        if (last == null) return;
+
+        Request r = last.request;
+
+        switch (last.actionType) {
+
+            case "SERVE":
+            //Re-insert served request
+               admitRequest(r);
+
+            //rollback stats (optional but better)
+               servedCount--;
+               totalEstimatedMinutesServed -= r.estimatedMinutes;
+               break;
+            case "ADMIT_CORRECTION":
+                //best effort removal  
+                correctionServed--; //optional tracking rollback but not perfect
+                break;
+            case "ADMIT_URGENT":
+                //PriorityQueue removal is O(n)
+            case "ADMIT_NORMAL":
+                //No direct way to remove from CircularQueue, so we won't attempt it.
+                break;    
+        }
     }
 
     public void printReport() {
