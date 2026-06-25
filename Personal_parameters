@@ -1,0 +1,27 @@
+# DCIT 308 Individual Parameters
+
+Student Index Number: 22013774
+
+Last Two Digits: 74
+
+## Derived Parameters
+
+Normal Circular Queue Capacity = 5 + last digit
+= 5 + 4
+= 9
+
+Correction Deque Capacity = 4 + second last digit
+= 4 + 7
+= 11
+
+Urgency Bonus = last digit mod 3
+= 4 mod 3
+= 1
+
+Minimum Service Steps = 20 + second last digit
+= 20 + 7
+= 27
+
+Trace Table Length = 10 + (last digit mod 5)
+= 10 + (4 mod 5)
+= 14

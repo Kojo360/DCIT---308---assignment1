@@ -1,0 +1,41 @@
+requestId,arrivalOrder,location,serviceType,urgencyLevel,estimatedMinutes,needsCorrection,notes
+PAT001,1,UGMC,GENERAL_CONSULTATION,2,15,false,Routine consultation
+PAT002,2,UGMC,PHARMACY,1,8,false,Prescription refill
+PAT003,3,UGMC,EMERGENCY_CARE,5,20,false,Severe chest pain
+PAT004,4,UGMC,LABORATORY,3,12,false,Blood test
+PAT005,5,UGMC,MEDICAL_RECORDS,2,10,true,Wrong patient information
+PAT006,6,UGMC,BILLING_INSURANCE,1,7,false,Insurance verification
+PAT007,7,UGMC,SPECIALIST_REFERRAL,4,15,false,Urgent cardiology review
+PAT008,8,UGMC,RADIOLOGY,3,18,false,X-ray request
+PAT009,9,UGMC,GENERAL_CONSULTATION,2,14,false,Follow-up consultation
+PAT010,10,UGMC,EMERGENCY_CARE,5,25,false,Accident victim
+PAT011,11,UGMC,MEDICAL_RECORDS,2,9,true,Incorrect patient ID
+PAT012,12,UGMC,PHARMACY,1,6,false,Medication pickup
+PAT013,13,UGMC,LABORATORY,4,10,false,Urgent lab analysis
+PAT014,14,UGMC,RADIOLOGY,2,16,false,Ultrasound appointment
+PAT015,15,UGMC,BILLING_INSURANCE,3,11,true,Billing correction
+PAT016,16,UGMC,GENERAL_CONSULTATION,2,13,false,Fever symptoms
+PAT017,17,UGMC,SPECIALIST_REFERRAL,5,18,false,Emergency neurology review
+PAT018,18,UGMC,PHARMACY,1,5,false,Drug collection
+PAT019,19,UGMC,LABORATORY,3,14,false,Routine screening
+PAT020,20,UGMC,MEDICAL_RECORDS,2,8,true,Duplicate patient record
+PAT021,21,UGMC,EMERGENCY_CARE,5,22,false,Respiratory distress
+PAT022,22,UGMC,GENERAL_CONSULTATION,2,12,false,General checkup
+PAT023,23,UGMC,RADIOLOGY,4,17,false,Urgent CT scan
+PAT024,24,UGMC,BILLING_INSURANCE,1,9,false,Payment confirmation
+PAT025,25,UGMC,PHARMACY,2,7,false,Prescription collection
+PAT026,26,UGMC,MEDICAL_RECORDS,3,10,true,Wrong appointment details
+PAT027,27,UGMC,SPECIALIST_REFERRAL,4,16,false,Urgent orthopedic review
+PAT028,28,UGMC,GENERAL_CONSULTATION,2,14,false,Hypertension review
+PAT029,29,UGMC,LABORATORY,5,12,false,Critical test request
+PAT030,30,UGMC,RADIOLOGY,2,15,false,MRI scheduling
+PAT031,31,UGMC,BILLING_INSURANCE,2,8,true,Insurance policy correction
+PAT032,32,UGMC,PHARMACY,1,6,false,Medication refill
+PAT033,33,UGMC,EMERGENCY_CARE,5,24,false,Severe allergic reaction
+PAT034,34,UGMC,GENERAL_CONSULTATION,3,13,false,Diabetes review
+PAT035,35,UGMC,MEDICAL_RECORDS,2,9,true,Patient name correction
+PAT036,36,UGMC,SPECIALIST_REFERRAL,4,15,false,Urgent oncology consultation
+PAT037,37,UGMC,LABORATORY,2,11,false,Routine urine test
+PAT038,38,UGMC,RADIOLOGY,3,16,false,Diagnostic imaging
+PAT039,39,UGMC,BILLING_INSURANCE,2,10,false,Receipt request
+PAT040,40,UGMC,EMERGENCY_CARE,5,21,false,Emergency trauma assessment
