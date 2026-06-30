@@ -13,31 +13,50 @@ public class CircularQueue {
 
     public boolean isFull() {
         // TODO 1: Return true when size equals the array capacity.
-        return false;
+        return size == data.length;
     }
 
     public boolean isEmpty() {
         // TODO 2: Return true when the queue has no items.
-        return false;
+        return size == 0;
     }
 
     public boolean enqueue(Request request) {
         // TODO 3: If full, return false.
+        if (isFull()) return false;
+
         // TODO 4: Move rear using modulo arithmetic and insert the request.
         // Formula: rear = (rear + 1) % data.length
+        rear = (rear + 1) % data.length;
+        data[rear] = request;
+
         // TODO 5: Increase size and return true.
-        return false;
+        size++;
+        return true;
     }
 
     public Request dequeue() {
         // TODO 6: If empty, return null.
+        if (isEmpty()) return null;
+
         // TODO 7: Save the front item, clear the old slot, move front using modulo, reduce size and return item.
-        return null;
+        Request request = data[front];
+        data[front] = null;
+        front = (front + 1) % data.length;
+        size--;
+
+        if (size == 0) {
+            front = 0;
+            rear = -1;
+        }
+
+        return request;
     }
 
     public Request peek() {
         // TODO 8: Return the front request without removing it.
-        return null;
+        if (isEmpty()) return null;
+        return data[front];
     }
 
     public int size() {

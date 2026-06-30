@@ -38,13 +38,11 @@ public class GhanaServiceCentre {
     }
 
     public void admitRequest(Request request) {
-        boolean admitted = false;
         // Rule 1: If needsCorrection is true, add to correctionDeque.
         if (request.needsCorrection){
             if (!correctionDeque.isFull()){
                 correctionDeque.addRear(request);
                 actions.push(new ActionRecord("ADMIT_CORRECTION", request));
-                admitted = true;
             } else {
                 overflowCount++;
             }
@@ -53,7 +51,6 @@ public class GhanaServiceCentre {
         else if (request.urgencyLevel >= 4) {
              actions.push(new ActionRecord("ADMIT_URGENT", request));
             urgentQueue.add(request);
-            admitted = true;
         
         }
         // Rule 3: Else add to normalQueue.
@@ -62,16 +59,9 @@ public class GhanaServiceCentre {
             if (!normalQueue.isFull()) {
                 normalQueue.enqueue(request);
                  actions.push(new ActionRecord("ADMIT_NORMAL", request));
-                admitted = true;
             } else {
                 overflowCount++;
             }
-        }
-        
-        // Rule 5: Push an ActionRecord for successful admissions.
-        if (admitted) {
-             actions.push(new ActionRecord("ADMIT_CORRECTION", request));
-
         }
     }
 
@@ -108,25 +98,22 @@ public class GhanaServiceCentre {
 
         switch (last.actionType) {
 
-            case "SERVE":
-            //Re-insert served request
-               admitRequest(r);
-
-            //rollback stats (optional but better)
-               servedCount--;
-               totalEstimatedMinutesServed -= r.estimatedMinutes;
-               break;
-            case "ADMIT_CORRECTION":
-                //best effort removal  
+            case "SERVE" -> {
+                //Re-insert served request
+                admitRequest(r);
+                
+                //rollback stats (optional but better)
+                servedCount--;
+                totalEstimatedMinutesServed -= r.estimatedMinutes;
+            }
+            case "ADMIT_CORRECTION" -> //best effort removal  
                 correctionServed--; //optional tracking rollback but not perfect
-                break;
-            case "ADMIT_URGENT":
-                //PriorityQueue removal is O(n)
-            case "ADMIT_NORMAL":
-                //No direct way to remove from CircularQueue, so we won't attempt it.
-                break;    
+            case "ADMIT_URGENT", "ADMIT_NORMAL" -> {
+            }    
         }
-    }
+        //PriorityQueue removal is O(n)
+        //No direct way to remove from CircularQueue, so we won't attempt it.
+            }
 
     public void printReport() {
         System.out.println("--- FINAL REPORT ---");

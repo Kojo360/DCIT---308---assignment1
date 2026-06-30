@@ -52,6 +52,7 @@ public class CorrectionDeque {
         if (size == 0) {
             rear = front; 
         }
+        size++;
         return true;
     }
 
