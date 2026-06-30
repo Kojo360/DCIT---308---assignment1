@@ -37,7 +37,7 @@ java -cp src GhanaServiceSimulator data/requests_sample.csv
 On Windows PowerShell:
 
 ```powershell
-java -cp src GhanaServiceSimulator data\requests_sample.csv
+java -cp src GhanaServiceSimulator data\requests.csv
 ```
 
 You can also run it from inside the `src` folder:
@@ -65,7 +65,7 @@ Available example files are in the `data` folder:
 To use your own dataset, replace the path in the run command:
 
 ```bash
-java -cp src GhanaServiceSimulator data/requests.csv
+java -cp src GhanaServiceSimulator data.csv
 ```
 
 ## Expected Output
